@@ -1,0 +1,7 @@
+.test {
+	height: 800px;
+    padding: 20px 20px;
+    width: 1000px;
+    color: #fff;
+    background: url('../images/img.png') no-repeat;
+}
