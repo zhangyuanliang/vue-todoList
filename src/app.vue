@@ -1,19 +1,39 @@
 <template>
-	<div class="test">{{test}}</div>
+	<div id="app">
+		<div id="cover"></div>
+		<Header></Header>
+		<todo></todo>
+	</div>
 </template>
 
 <script>
+	import Header from './todo/header.vue'
+	import todo from './todo/todo.vue'
+
 	export default {
-		data() {
-			return {
-				test: 'hello vue!'
-			}
+		components: {
+			Header,
+			todo
 		}
 	}
 </script>
-<!-- 
-<style>
-	.test {
-		color: red;
+
+<style lang="stylus" scoped>
+	#app {
+		position absolute
+		top 0
+		right 0
+		bottom 0
+		left 0
 	}
-</style> -->
+	#cover {
+		position absolute
+		top 0
+		right 0
+		bottom 0
+		left 0
+		background-color #555
+		opacity 0
+	}
+
+</style>
