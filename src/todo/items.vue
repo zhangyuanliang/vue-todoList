@@ -27,6 +27,9 @@
 			margin-left: 45px;
 			padding: 15px 60px 15px 15px;
    			line-height: 1.2;
+   			color: #34373B;
+   			-webkit-font-smoothing: antialiased;
+			font-weight: 400;
 		}
 		&:hover {
 			.destory:after {

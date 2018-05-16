@@ -31,7 +31,7 @@
     	width: 600px;
     	margin: 0 auto;
     	box-shadow: 8px 8px 5px #666;
-    	opacity: 0.6;
+    	// opacity: 0.6;
     }
     
     .add-input {
