@@ -33,7 +33,7 @@
 		font-size: 16px;
 		line-height: 1.5em;
 		padding: 5px 8px;
-		color: #191919;
+		color: #FEFCFF;
 		display: flex;
 		justify-content: space-between; /* 均匀排列每个元素 首个元素放置于起点，末尾元素放置于终点 */
 		-webkit-font-smoothing: antialiased;

@@ -3,16 +3,19 @@
 		<input type="text" 
 			   class="add-input"
 			   placeholder="接下来要做什么？">
+		<items></items>
 		<Tabs :filter="filter"></Tabs>
 	</section>
 </template>
 
 <script>
 	import Tabs from './tabs.vue'
+	import items from './items.vue'
 
 	export default {
 		components: {
 			Tabs,
+			items,
 		},
 		data() {
 			return {
