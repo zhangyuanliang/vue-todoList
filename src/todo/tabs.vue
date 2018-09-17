@@ -5,10 +5,11 @@
 			<span 
 				v-for="state in states"
 				:class="[state, filter==state? 'actived':'']"
+				v-on:click="changeStates(state)"
 			>{{state}}</span>
-			
 		</span>
 		<span class="clear">clear completed</span>
+		<input type="button" value="test" v-on:click="testClick">
 	</div>
 </template>
 
@@ -23,6 +24,14 @@
 		data() {
 			return {
 				states: ['all', 'active', 'completed']
+			}
+		},
+		methods: {
+			changeStates: function(state) {alert();
+				this.$emit('changeFilter', state);
+			},
+			testClick: function() {
+				alert();
 			}
 		}
 	}
@@ -64,4 +73,4 @@
 		cursor: pointer;
 		
 	}
-</style>
+</style> -->

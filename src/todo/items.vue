@@ -1,29 +1,36 @@
 <template>
-	<div class="todo-item">
-		<input type="checkbox" name="" id="" class="toggle">
-		<label for="">test test test test</label>
-		<button class="destory"></button>
+	<div>
+		<div v-for="(todo,index) in todos" class="todo-item" v-bind:class="{finished: todo.finished}">
+			<input type="checkbox" class="toggle" v-model="todo.finished" v-on:click="toggleFinish(todo)"/>
+			<label for="">{{todo.title}}</label>
+			<button class="destory" v-on:click="toDestory(index)"></button>
+		</div>
 	</div>
 </template>
 
 <script>
 	export default {
-
+		props: ['todos'],
+		methods: {
+			toggleFinish: function(todo) {
+				todo.finished = !todo.finish;
+			},
+			toDestory: function(index) {
+				this.$emit('destoryTodo', index);
+			}
+		}
 	}
 </script>
 
 <style lang="stylus" scoped>
 	.todo-item {
 		position: relative;
-		margin-top: 6px;
+		margin-top: 3px;
 		font-size: 24px;
-		border-bottom: 1px solid #CCCACD;
+		border-bottom: 1px dashed #a2a1a2;
 		border-top: 1px solid #CCCACD;
-		// background-color: #E4F3FF;
 		label {
 			display: block;
-			// white-space: pre-line;
-   //          word-break: break-all;
 			margin-left: 45px;
 			padding: 15px 60px 15px 15px;
    			line-height: 1.2;
@@ -35,6 +42,10 @@
 			.destory:after {
 				content: 'x'
 			}
+		}
+		&.finished label{
+			color: #b5b1b1;
+			text-decoration: line-through;
 		}
 	}
 	

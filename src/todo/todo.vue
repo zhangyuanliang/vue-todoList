@@ -2,25 +2,70 @@
 	<section class="real-app">
 		<input type="text" 
 			   class="add-input"
-			   placeholder="接下来要做什么？">
-		<items></items>
-		<Tabs :filter="filter"></Tabs>
+			   placeholder="接下来要做什么？"
+			   v-model="newTodo"
+			   v-on:keyup.enter="addTodo">
+		<Items :todos="filterTodos" v-on:destoryTodo="removeTodo"></Items>
+		<Tabs :filter="filter" v-on:changeFilter="updateFilter"></Tabs>
 	</section>
 </template>
 
 <script>
+	import Items from './items.vue'
 	import Tabs from './tabs.vue'
-	import items from './items.vue'
 
 	export default {
-		components: {
-			Tabs,
-			items,
-		},
 		data() {
 			return {
+				todos: [
+					{title: 'coding', finished: false},
+					{title: 'walking', finished: true}
+				],
+				newTodo: '',
 				filter: 'all'
 			}
+		},
+		computed: {
+			filterTodos: function() {
+				var filter = this.filter;
+				return this.todos.filter(function(todo) {
+					var condition;
+					switch (filter) {
+						case 'active':
+							condition = todo.finished === false;
+							break;
+						case 'completed':
+							condition = todo.finished === true;
+							break;
+						default:
+							condition = true;
+							break;
+					}
+					return condition;
+				})
+			}
+		},
+		methods: {
+			addTodo: function() {
+				if (!this.newTodo) {
+					return false;
+				}
+				this.todos.push({
+					title: this.newTodo,
+					finished: false
+				})
+				this.newTodo = '';
+			},
+			removeTodo: function(index) {
+				this.todos.splice(index, 1);
+			},
+			updateFilter: function(state) {
+				this.filter = state;
+			}
+		},
+		components: {
+			Items,
+			Tabs
 		}
 	}
 </script>
