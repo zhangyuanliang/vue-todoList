@@ -8,7 +8,7 @@
 				v-on:click="changeStates(state)"
 			>{{state}}</span>
 		</span>
-		<span class="clear">clear completed</span>
+		<span class="clear" v-on:click="test">clear completed</span>
 	</div>
 </template>
 
@@ -28,6 +28,9 @@
 		methods: {
 			changeStates: function(state) {alert();
 				this.$emit('changeFilter', state);
+			},
+			test: function() {
+				alert();
 			}
 		}
 	}

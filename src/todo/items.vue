@@ -1,26 +1,20 @@
 <template>
-	<div>
-		<div v-for="(todo,index) in todos" class="todo-item" v-bind:class="{finished: todo.finished}">
-			<input type="checkbox" class="toggle" v-model="todo.finished" v-on:click="toggleFinish(todo)"/>
-			<label for="">{{todo.title}}</label>
-			<button class="destory" v-on:click="toDestory(index)"></button>
-		</div>
-		<input type="button" value="test" v-on:click="testClick">
+	<div v-bind:class="['todo-item', {finished: todo.finished}]">
+		<input type="checkbox" class="toggle" v-model="todo.finished" v-on:click="toggleFinish"/>
+		<label for="">{{todo.title}}</label>
+		<button class="destory" v-on:click="toDestory"></button>
 	</div>
 </template>
 
 <script>
 	export default {
-		props: ['todos'],
+		props: ['todo', 'index'],
 		methods: {
 			toggleFinish: function(todo) {
-				todo.finished = !todo.finish;
+				this.todo.finished = !this.todo.finish;
 			},
-			toDestory: function(index) {
-				this.$emit('destoryTodo', index);
-			},
-			testClick: function() {
-				alert();
+			toDestory: function() {
+				this.$emit('destoryTodo', this.index);
 			}
 		}
 	}

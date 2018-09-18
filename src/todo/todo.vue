@@ -5,7 +5,12 @@
 			   placeholder="接下来要做什么？"
 			   v-model="newTodo"
 			   v-on:keyup.enter="addTodo">
-		<Items :todos="filterTodos" v-on:destoryTodo="removeTodo"></Items>
+		<Items v-for="(todo, index) in filterTodos"
+			   v-on:destoryTodo="removeTodo"
+			   :todo="todo"
+			   :index="index"
+			   :key="index"
+			   ></Items>
 		<Tabs :filter="filter" v-on:changeFilter="updateFilter"></Tabs>
 	</section>
 </template>
