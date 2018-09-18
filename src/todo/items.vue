@@ -5,6 +5,7 @@
 			<label for="">{{todo.title}}</label>
 			<button class="destory" v-on:click="toDestory(index)"></button>
 		</div>
+		<input type="button" value="test" v-on:click="testClick">
 	</div>
 </template>
 
@@ -17,6 +18,9 @@
 			},
 			toDestory: function(index) {
 				this.$emit('destoryTodo', index);
+			},
+			testClick: function() {
+				alert();
 			}
 		}
 	}
@@ -43,7 +47,7 @@
 				content: 'x'
 			}
 		}
-		&.finished label{
+		&.finished label {
 			color: #b5b1b1;
 			text-decoration: line-through;
 		}

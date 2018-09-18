@@ -9,7 +9,6 @@
 			>{{state}}</span>
 		</span>
 		<span class="clear">clear completed</span>
-		<input type="button" value="test" v-on:click="testClick">
 	</div>
 </template>
 
@@ -18,7 +17,7 @@
 		props: {
 			filter: {
 				type: String,
-				require: true,
+				require: true
 			}
 		},
 		data() {
@@ -29,9 +28,6 @@
 		methods: {
 			changeStates: function(state) {alert();
 				this.$emit('changeFilter', state);
-			},
-			testClick: function() {
-				alert();
 			}
 		}
 	}
