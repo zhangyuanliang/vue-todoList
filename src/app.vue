@@ -34,6 +34,7 @@
 		left 0
 		background-color #555
 		opacity 0
+		z-index -1
 	}
 
 </style>

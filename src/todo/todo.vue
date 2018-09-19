@@ -5,49 +5,51 @@
 			   placeholder="接下来要做什么？"
 			   v-model="newTodo"
 			   v-on:keyup.enter="addTodo">
-		<Items v-for="(todo, index) in filterTodos"
+		<Items v-for="todo in filterTodos"
 			   v-on:destoryTodo="removeTodo"
 			   :todo="todo"
-			   :index="index"
-			   :key="index"
+			   :key="todo.id"
 			   ></Items>
-		<Tabs :filter="filter" v-on:changeFilter="updateFilter"></Tabs>
+		<Tabs :filter="filter" 
+			  :todos="todos"
+			  v-on:changeFilter="updateFilter"
+			  v-on:toClearAllCompleted="clearAllCompleted"
+			  ></Tabs>
 	</section>
 </template>
 
 <script>
 	import Items from './items.vue'
 	import Tabs from './tabs.vue'
+	import Store from '../store.js'
 
 	export default {
 		data() {
 			return {
-				todos: [
-					{title: 'coding', finished: false},
-					{title: 'walking', finished: true}
-				],
+				todos: Store.getTodos(),
 				newTodo: '',
-				filter: 'all'
+				filter: 'all',
+				nextTodoId: 0
 			}
 		},
 		computed: {
 			filterTodos: function() {
 				var filter = this.filter;
-				return this.todos.filter(function(todo) {
-					var condition;
-					switch (filter) {
-						case 'active':
-							condition = todo.finished === false;
-							break;
-						case 'completed':
-							condition = todo.finished === true;
-							break;
-						default:
-							condition = true;
-							break;
-					}
-					return condition;
-				})
+				if (filter == 'all') {
+					return this.todos;
+				}
+				var finished = this.filter === 'completed';
+				return this.todos.filter((todo) => todo.finished === finished);
+			}
+		},
+		watch: {
+			todos: {
+				handler: function (currTodos, oldTodos) {
+					var ids = currTodos.map((todo) => todo.id);
+					this.nextTodoId = Math.max.apply(null, ids) + 1;
+					Store.setTodos(currTodos);
+				},
+      			deep: true
 			}
 		},
 		methods: {
@@ -56,16 +58,20 @@
 					return false;
 				}
 				this.todos.push({
+					id: this.nextTodoId,
 					title: this.newTodo,
 					finished: false
 				})
 				this.newTodo = '';
 			},
-			removeTodo: function(index) {
-				this.todos.splice(index, 1);
+			removeTodo: function(todoId) {
+				this.todos.splice(this.todos.findIndex((todo) => todo.id === todoId), 1);
 			},
 			updateFilter: function(state) {
 				this.filter = state;
+			},
+			clearAllCompleted: function() {
+				this.todos = this.todos.filter((todo) => !todo.finished);
 			}
 		},
 		components: {

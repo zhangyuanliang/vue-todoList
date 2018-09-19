@@ -8,13 +8,13 @@
 
 <script>
 	export default {
-		props: ['todo', 'index'],
+		props: ['todo'],
 		methods: {
 			toggleFinish: function(todo) {
 				this.todo.finished = !this.todo.finish;
 			},
 			toDestory: function() {
-				this.$emit('destoryTodo', this.index);
+				this.$emit('destoryTodo', this.todo.id);
 			}
 		}
 	}
