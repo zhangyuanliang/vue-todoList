@@ -57,7 +57,7 @@
 				if (!this.newTodo) {
 					return false;
 				}
-				this.todos.push({
+				this.todos.unshift({
 					id: this.nextTodoId,
 					title: this.newTodo,
 					finished: false

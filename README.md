@@ -11,3 +11,6 @@
 
 ##### 生产环境
 - 启动项目打包：`npm run build`
+
+#### 展示效果：
+![Image text](https://github.com/zhangyuanliang/vue-webpack-todo/blob/master/img/img.png)
